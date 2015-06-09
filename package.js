@@ -2,7 +2,7 @@ Package.describe({
   name: 'poetic:swiper-slides',
   version: '0.0.1',
   summary: 'an implementation Swiper combined with Iron Router query param management',
-  git: '',
+  git: 'https://github.com/poetic/swiper-slides',
   documentation: 'README.md'
 });
 
