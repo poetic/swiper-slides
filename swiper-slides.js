@@ -1,5 +1,5 @@
 Template.swiperSlides.onRendered(function(){
-  var options = this.data.options;
+  var options = this.data.options || {};
   var defaults = {};
 
   if (this.data && this.data.param) {
