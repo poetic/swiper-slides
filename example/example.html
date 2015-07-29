@@ -1,0 +1,23 @@
+<head>
+  <title>Swiper Slides Example</title>
+</head>
+
+<body>
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <h2>Swiper Slides Example</h2>
+
+  {{#swiperSlides param='slide'}}
+    <div class='swiper-slide'>
+      one
+    </div>
+    <div class='swiper-slide'>
+      two
+    </div>
+    <div class='swiper-slide'>
+      three
+    </div>
+  {{/swiperSlides}}
+</template>

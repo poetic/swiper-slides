@@ -6,14 +6,13 @@ Package.describe({
   documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
+Package.onUse(function(api){
   api.versionsFrom('1.1.0.2');
 
   api.use([
     'templating',
-    'iron:router@1.0.9',
-    'cottz:iron-query@1.2.3',
-    'lacosta:swiper@0.0.1'
+    'lacosta:swiper@0.0.1',
+    'poetic:formaldehyde@0.0.6'
   ]);
 
   api.addFiles([
@@ -24,8 +23,7 @@ Package.onUse(function(api) {
   ]);
 
   api.imply([
-    'iron:router@1.0.9',
-    'cottz:iron-query@1.2.3'
+    'poetic:formaldehyde@0.0.6'
   ]);
 
   api.export('Swiper');
