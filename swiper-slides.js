@@ -1,54 +1,61 @@
+var PM = Meteor.Poetic.Formaldehyde; // param manager
+
+Template.swiperSlides.onCreated(function(){
+  var template = this;
+  var param = (template.data && template.data.param);
+
+  if (param) {
+    PM.register(param, function(val, state, done){
+      var el = template.$('.swiper-container')[0];
+
+      if (val && val !== el.swiper.activeIndex.toString()) {
+        el.swiper.slideTo(val);
+      }
+
+      done();
+    });
+  }
+});
+
 Template.swiperSlides.onRendered(function(){
-  var options = this.data.options || {};
+  var options = (this.data && this.data.options) || {};
   var defaults = {};
 
   if (this.data && this.data.param) {
-    options.initialSlide = setInitialSlide.call(this);
+    options.initialSlide = setInitialSlide.call(this, options);
     defaults = { onTransitionEnd: onTransitionEnd.bind(this) };
   }
 
   this.$('.swiper-container').swiper(_.extend(options, defaults));
+});
 
-    // can only be set up after the above initialization
-  if (this.data && this.data.param) {
-    watchParam.call(this);
-  }
+Template.swiperSlides.onDestroyed(function(){
+  var param = (this.data && this.data.param);
+
+  if (param) { PM.deregister(param) }
 });
 
 function onTransitionEnd (e){
   var param = this.data.param;
   var currentSlide = e.activeIndex.toString();
 
-  if (Iron.query.get(param) !== currentSlide) {
-    Iron.query.set(param, currentSlide);
+  if (PM.get(param) !== currentSlide) {
+    PM.set(param, currentSlide);
   }
 };
 
-function setInitialSlide (){
+function setInitialSlide (options){
   var param = this.data.param;
-  var paramIndex = Iron.query.get(param);
+  var paramIndex = PM.get(param);
   var initial;
 
   if (paramIndex) {
     return paramIndex;
+
   } else {
-    initial = this.data.options.initialSlide;
-    Iron.query.set(param, initial || '0');
+    initial = options.initialSlide;
+    PM.set(param, initial || '0', true);
 
     return initial;
   }
-};
-
-function watchParam (){
-  var template = this;
-
-  Template.instance().autorun(function(){
-    var el = template.$('.swiper-container')[0];
-    var param = template.data.param;
-    var index = Iron.controller().getParams().query[param];
-
-    if (index !== el.swiper.activeIndex.toString()) {
-      el.swiper.slideTo(index);
-    }
-  });
 };
