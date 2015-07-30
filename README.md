@@ -6,15 +6,7 @@
 
 ## Getting Started
 
-This package exposes a `swiperSlides` template along with the following dependencies:
-
-```
-iron:router
-cottz:iron-query
-lacosta:swiper
-```
-
-The `swiperSlides` template is defined in block form as follows. All parameters are optional.
+This package exposes the `Swiper` object and a `swiperSlides` template, which is defined in block form as follows. All parameters are optional.
 
 ```
 {{#swiperSlides
