@@ -1,10 +1,9 @@
 <template name='swiperSlides'>
   <div id='{{id}}' class='swiper-container {{classNames}}'>
-    {{#if background}}
-      <div class='swiper-background {{bgClasses}}' data-swiper-parallax='{{parallaxPx}}'>
-        {{> Template.dynamic template=background}}
-      </div>
+    {{#if backgroundTemplate}}
+      {{> Template.dynamic template=backgroundTemplate}}
     {{/if}}
+
 
     <div class='swiper-wrapper'>
       {{> Template.contentBlock}}
