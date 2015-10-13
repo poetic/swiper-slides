@@ -1,4 +1,4 @@
-var PM = Meteor.Poetic.Formaldehyde; // param manager
+var PM = Formaldehyde; // param manager
 
 Template.swiperSlides.onCreated(function(){
   var template = this;
